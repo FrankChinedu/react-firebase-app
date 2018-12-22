@@ -34,15 +34,15 @@ export const signUp = (newUser) => {
             newUser.email,
             newUser.password,
         ).then((resp)=>{
-            return firestore.collection('user').doc(resp.user.uid).set({
-                firstName: newUser.firstName,
-                lastName: newUser.lastName,
-                initials: newUser.firstName[0] + newUser.lastName[0]
+            return firestore.collection('users').doc(resp.user.uid).set({
+                firstName: newUser.firstname,
+                lastName: newUser.lastname,
+                initials: newUser.firstname[0] + newUser.lastname[0]
             })
         }).then(()=>{
         dispatch({type: 'SIGNUP_SUCCESS'})
         }).catch(err=> {
-            dispatch({type:'SIGNUP_ERROR', err})
+            dispatch({type:'SIGNUP_ERROR', err})  
         })
     }
 }

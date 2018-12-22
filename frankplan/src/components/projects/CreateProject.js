@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createProject } from '../../store/actions/projectActions'
+import { Redirect } from 'react-router-dom'
 
 class CreateProject extends Component {
     state = {
@@ -16,8 +17,12 @@ class CreateProject extends Component {
         e.preventDefault();
         // console.log(this.state)
         this.props.createProject(this.state)
+        this.props.history.push("/")
     }
     render() {
+        console.log('dffd', this.props)
+        const {auth} = this.props
+        if(!auth.uid) return <Redirect to="/signin" />
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className="white">
