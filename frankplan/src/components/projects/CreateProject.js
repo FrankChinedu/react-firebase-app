@@ -22,6 +22,7 @@ class CreateProject extends Component {
     render() {
         console.log('dffd', this.props)
         const {auth} = this.props
+        // console.log(auth)
         if(!auth.uid) return <Redirect to="/signin" />
         return (
             <div className="container">
@@ -47,10 +48,17 @@ class CreateProject extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    // console.log(state);
+    return {
+        auth: state.firebase.auth
+    }
+}
+
 const  mapDispatchToProps = (dispatch) => {
     return {
         createProject: (project) => dispatch(createProject(project))
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateProject)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProject)
